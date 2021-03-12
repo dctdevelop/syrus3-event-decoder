@@ -3,8 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package syrus.event.decoder;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -24,10 +22,10 @@ public class SyrusEventDecoder
      */
     public static void main(String[] args)
     {
-        System.out.println("Event decoder started!");
+        //System.out.println("Event decoder started!");
         if (null == args || args.length < 1)
         {
-            System.out.println("Please specify the file path");
+            System.out.println("Please specify the file name");
             return;
         }
         try
@@ -75,7 +73,7 @@ public class SyrusEventDecoder
                     i++;
                     if (file_is.available() > 0)
                     {
-                        System.out.println(" " + i + " available " + file_is.available());
+                        //System.out.println(" " + i + " available " + file_is.available());
                         continue;
                     }
                     break;

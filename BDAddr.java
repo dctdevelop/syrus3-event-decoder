@@ -1,5 +1,3 @@
-package syrus.event.decoder;
-
 /**
  *
  * @author Andres Cabezas

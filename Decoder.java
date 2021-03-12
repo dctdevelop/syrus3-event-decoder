@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package syrus.event.decoder;
 
 /**
  *
@@ -28,8 +27,6 @@ public class Decoder
     {
         int value;
         byte evcode = (byte) ((taipZip[0] >>> 1) & 0x7F);
-
-        System.out.println("Decoding " + taipZip.length + "Bytes");
 
         if (evcode == 127)
         {
@@ -149,10 +146,9 @@ public class Decoder
 
         try
         {
-            System.out.println("DecodingGroups " + Integer.toBinaryString(groupMask & 0xFF));
             if ((groupMask & 0x01) == 0x01)
             {// Add byteInfo with mask_1
-                System.out.println("DecodingGroup1 " + Integer.toBinaryString(paramMask & 0xFF) + " i=" + i);
+                
                 if ((paramMask & 0x01) == 0x01)
                 {// Add Virtual Odometer. Old format	
                     data[i] &= 0x7F;
@@ -283,7 +279,7 @@ public class Decoder
                     mask_2 = data[i];
                     i++;
                 }
-                System.out.println("DecodingGroup2 " + Integer.toBinaryString(mask_2 & 0xFF) + " i=" + i);
+                
                 //#if _ANALOG_INPUT == 1
                 if ((mask_2 & 0x01) == 0x01)
                 {// Add ADC information
@@ -391,7 +387,7 @@ public class Decoder
                     mask_3 = data[i];
                     i++;
                 }
-                System.out.println("DecodingGroup3 " + Integer.toBinaryString(mask_3 & 0xFF) + " i=" + i);
+                
                 //#if _1W_INTERFACE == 1
                 if ((mask_3 & 0x01) == 0x01)
                 {// Add Total vehicle distance
@@ -575,7 +571,7 @@ public class Decoder
                     mask_4 = data[i];
                     i++;
                 }
-                System.out.println("DecodingGroup4 " + Integer.toBinaryString(mask_4 & 0xFF) + " i=" + i);
+                
                 //#if _1W_INTERFACE == 1
                 if ((mask_4 & 0x01) == 0x01)
                 {// Add ECU fuel level
@@ -735,7 +731,7 @@ public class Decoder
                     mask_5 = data[i];
                     i++;
                 }
-                System.out.println("DecodingGroup5 " + Integer.toBinaryString(mask_5 & 0xFF) + " i=" + i);
+                
                 //#if _1W_INTERFACE == 1
                 if ((mask_5 & 0x01) == 0x01)
                 {// Add ecu Distance with mil On
@@ -901,7 +897,7 @@ public class Decoder
                     mask_6 = data[i];
                     i++;
                 }
-                System.out.println("DecodingGroup6 " + Integer.toBinaryString(mask_6 & 0xFF) + " i=" + i);
+                
                 //#if _1W_INTERFACE == 1
                 if ((mask_6 & 0x01) == 0x01)
                 {// Add engine oil level
@@ -1062,7 +1058,7 @@ public class Decoder
                     mask_7 = data[i];
                     i++;
                 }
-                System.out.println("DecodingGroup7 " + Integer.toBinaryString(mask_7 & 0xFF) + " i=" + i);
+                
                 //#if _1W_INTERFACE == 1
                 if ((mask_7 & 0x01) == 0x01)
                 {// Add Hydraulic oil temperature 
@@ -1253,7 +1249,7 @@ public class Decoder
                     mask_8 = data[i];
                     i++;
                 }
-                System.out.println("DecodingGroup8 " + Integer.toBinaryString(mask_8 & 0xFF) + " i=" + i);
+                
                 if ((mask_8 & 0x01) == 0x01)
                 {
                     char regionType = (char) taipZip[i + 1];
@@ -1360,11 +1356,11 @@ public class Decoder
             if (data.length >= (i + 3))
             {//There is more information
                 int newGroup = data[i++];
-                System.out.println("extGroup " + Integer.toBinaryString(newGroup & 0xFF));
+                
                 if ((newGroup & 0x01) == 0x01)
                 {
                     short mask_9 = data[i++];
-                    System.out.println("DecodingGroup9 " + Integer.toBinaryString(mask_9 & 0xFF) + " i=" + i);
+                    
                     if ((mask_9 & 0x01) == 0x01)
                     {// Over speed counter
                         value = (((((data[i] << 8) | data[i + 1]) << 8) | data[i + 2]) << 8) | data[i + 3];
@@ -1488,7 +1484,7 @@ public class Decoder
                 if ((newGroup & 0x02) == 0x02)
                 {
                     short mask_10 = data[i++];
-                    System.out.println("DecodingGroup10 " + Integer.toBinaryString(mask_10 & 0xFF) + " i=" + i);
+                    
                     if ((mask_10 & 0x01) == 0x01)
                     {// Add VO new format
                         long vo = (((((((((long) data[i]) << 8) | data[i + 1]) << 8) | data[i + 2]) << 8) | data[i + 3]) << 8)
@@ -1650,7 +1646,7 @@ public class Decoder
                 if ((newGroup & 0x04) == 0x04)
                 {
                     short mask_11 = data[i++];
-                    System.out.println("DecodingGroup11 " + Integer.toBinaryString(mask_11 & 0xFF) + " i=" + i);
+                    
                     //#if _1W_INTERFACE == 1
                     if ((mask_11 & 0x01) == 0x01)
                     {// OBD2 Fuel Pressure
@@ -1805,7 +1801,7 @@ public class Decoder
                 if ((newGroup & 0x08) == 0x08)
                 {
                     short mask_12 = data[i++];
-                    System.out.println("DecodingGroup12 " + Integer.toBinaryString(mask_12 & 0xFF) + " i=" + i);
+                    
                     //#if _1W_INTERFACE == 1
                     if ((mask_12 & 0x01) == 0x01)
                     {// OBD2 Time run by the engine since MIL is activated
@@ -1903,7 +1899,7 @@ public class Decoder
                     //#if _1W_INTERFACE == 1
                     if ((mask_12 & 0x40) == 0x40)
                     {// Ecu multiple error codes
-                        System.out.println("DecodingZC");
+                        
                         ecuSt = (char) (taipZip[i + 42]);
                         if (ecuSt == 'd')
                         {
@@ -2030,7 +2026,7 @@ public class Decoder
                 if ((newGroup & 0x10) == 0x10)
                 {
                     short mask_13 = data[i++];
-                    System.out.println("DecodingGroup13 " + Integer.toBinaryString(mask_13 & 0xFF) + " i=" + i);
+                    
                     //#if _1W_INTERFACE == 1
                     if ((mask_13 & 0x01) == 0x01)
                     {// ECU Diesel exhaust fluid level 
@@ -2184,7 +2180,7 @@ public class Decoder
                 if ((newGroup & 0x20) == 0x20)
                 {
                     short mask_14 = data[i++];
-                    System.out.println("DecodingGroup14 " + Integer.toBinaryString(mask_14 & 0xFF) + " i=" + i);
+                    
                     if ((mask_14 & 0x01) == 0x01)
                     {//RF Id reader
                         long id = Utils.byteArrayToLong(taipZip, i, 8);
@@ -2415,7 +2411,7 @@ public class Decoder
                 if ((newGroup & 0x40) == 0x40)
                 {
                     short mask_15 = data[i++];
-                    System.out.println("DecodingGroup15 " + Integer.toBinaryString(mask_15 & 0xFF) + " i=" + i);
+                    
                     if ((mask_15 & 0x01) == 0x01)
                     {//Fuel sensor with serial expander
                         for (int j = 0; j < MAX_NBR_OF_SENSORS - 1; j++)
@@ -2647,7 +2643,7 @@ public class Decoder
                 if ((newGroup & 0x80) == 0x80)
                 {
                     short mask_16 = data[i++];
-                    System.out.println("DecodingGroup16 " + Integer.toBinaryString(mask_16 & 0xFF) + " i=" + i);
+                    
                     if ((mask_16 & 0x01) == 0x01)
                     {//ECU Turbocharger
                         ecuSt = (char) taipZip[i + 1];
@@ -2844,16 +2840,16 @@ public class Decoder
         }
         catch (Exception e)
         {
-            System.out.println("wrongDataExc " + e.toString());
+            
             //#if _PRINT_STACK_TRACE == 1
 //#             e.printStackTrace();
             //#endif
             return "";
         }
-        System.out.println("dataSize[" + data.length + "] i[" + i + "]");
+        
         if (data.length != i)
         {//Wrong data
-            System.out.println("wrongData");
+            
             return "";
         }
         return toRet;

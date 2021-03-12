@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package syrus.event.decoder;
 
 /**
  *
@@ -360,21 +359,21 @@ public class Utils
             return null;
         }
         int temp;
-        //Speed (0 - 255 / 0x00 – 0xFF)
+        //Speed (0 - 255 / 0x00 - 0xFF)
         temp = pkg[0] & 0xFF;
         toRet += integerF(temp, 3);
-        //Left turn signal: 0x00 – None, 0x01 – Left turn signal On	
+        //Left turn signal: 0x00 - None, 0x01 - Left turn signal On	
         toRet += pkg[1] & 0x01;
-        //Right turn signal: 0x00 – None, 0x01 – Right turn signal On
+        //Right turn signal: 0x00 - None, 0x01 - Right turn signal On
         toRet += pkg[2] & 0x01;
-        //Brake signal: 0x00 – None, 0x01 – Brake On
+        //Brake signal: 0x00 - None, 0x01 - Brake On
         toRet += pkg[3] & 0x01;
         //RPM: 0 - 65535, RPM[0] MSB / RPM[1] LSB
         temp = ((pkg[4] & 0xFF) << 8) | (pkg[5] & 0xFF);
         toRet += integerF(temp, 5);
-        //Lane departure warning left: 0x00 – None, 0x01 – Recognized, 0x02 – Left LDW event, 0x03 – Function disabled 
+        //Lane departure warning left: 0x00 - None, 0x01 - Recognized, 0x02 - Left LDW event, 0x03 - Function disabled 
         toRet += pkg[6] & 0x03;
-        //Lane departure warning right: 0x00 – None, 0x01 – Recognized, 0x02 – Right LDW event, 0x03 – Function disabled 
+        //Lane departure warning right: 0x00 - None, 0x01 - Recognized, 0x02 - Right LDW event, 0x03 - Function disabled 
         toRet += pkg[7] & 0x03;
         //Left distance: Length of left lane (cm), Left[0] MSB / Left[1] LSB 
         temp = ((pkg[8] & 0xFF) << 8) | (pkg[9] & 0xFF);
@@ -385,19 +384,19 @@ public class Utils
         //TTC time, 0 - 25.5 sec, Ex) 125 => 12.5sec
         temp = pkg[12] & 0xFF;
         toRet += integerF(temp, 3);
-        //SDA - Safety distance alarm : 0x00 – None, 0x01 – Recognized (ahead vehicle), 0x02 – SDA event, 0x03 – Function disabled
+        //SDA - Safety distance alarm : 0x00 - None, 0x01 - Recognized (ahead vehicle), 0x02 - SDA event, 0x03 - Function disabled
         toRet += pkg[13] & 0x03;
-        //Front vehicle start alarm: 0x00 – None, 0x02 – FVSA event, 0x03 – Function disabled
+        //Front vehicle start alarm: 0x00 - None, 0x02 - FVSA event, 0x03 - Function disabled
         toRet += pkg[14] & 0x03;
-        //Forward proximity warning: 0x00 – None, 0x02 – FPW event, 0x03 – Function disabled
+        //Forward proximity warning: 0x00 - None, 0x02 - FPW event, 0x03 - Function disabled
         toRet += pkg[15] & 0x03;
-        //Forward collision warning: 0x00 – None, 0x02 – FCW event, 0x03 – Function disabled
+        //Forward collision warning: 0x00 - None, 0x02 - FCW event, 0x03 - Function disabled
         toRet += pkg[16] & 0x03;
-        //Pedestrian collision warning: 0x00 – None, 0x01 – Recognized, 0x02 – PCW event, 0x03 – Function disabled
+        //Pedestrian collision warning: 0x00 - None, 0x01 - Recognized, 0x02 - PCW event, 0x03 - Function disabled
         toRet += pkg[17] & 0x03;
-        //Record: 0x00 – None, 0x01 – Recording (Mic off), 0x02 – Recording (Mic On)
+        //Record: 0x00 - None, 0x01 - Recording (Mic off), 0x02 - Recording (Mic On)
         toRet += pkg[18] & 0x03;
-        //Error code: 0x00 – None, 0x01 – Low visibility, 0x02 – Camera blocked 
+        //Error code: 0x00 - None, 0x01 - Low visibility, 0x02 - Camera blocked 
         toRet += pkg[19] & 0x03;
         return toRet;
     }
