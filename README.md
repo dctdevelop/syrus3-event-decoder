@@ -97,7 +97,7 @@ To compile the SyrusEventDecoder program, type the following:
 javac -Xlint:unchecked SyrusEventDecoder.java
 ```
 
-## Excute the program
+## Execute the program
 
 To execute the program with the sample file provided in this repo, type this:
 
